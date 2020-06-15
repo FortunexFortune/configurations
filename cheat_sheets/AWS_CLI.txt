@@ -97,6 +97,8 @@ aws ec2 describe-instaces  # Retuns ec2 instaces
 S3
 =================================================================
 aws s3 ls 
+aws s3 ls s3://<buvketName>/
+aws s3 ls s3://<buvketName>/<prefix>
 aws s3 cp s3://pathS3 ./ --recursive     # Copies content within a bucket into destination folder
 #aws s3 cp s3://fmap-sat/etc . --recursive --exclude "*" --include "*5e4d01*" # Download only objects that match the include pattern
 aws s3api list-objects --bucket bucketname --query "Contents[?LastModified>='2019-06-01T00:00:000Z'].{Key: Key , LastModified: LastModified}"

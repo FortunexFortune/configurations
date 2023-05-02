@@ -419,3 +419,14 @@ docker container exec -it  -u 0 db  /bin/bash
 
 docker run --rm -d --network host --name my_nginx nginx   # host network
 
+
+===================== quick containers ==================================
+
+
+
+docker run --name tmp-aws --rm -it --entrypoint //bin/bash amazon/aws-cli
+
+docker run --name tmp-ubuntu --rm -it ubuntu //bin/bash # ubuntu docker 
+
+
+

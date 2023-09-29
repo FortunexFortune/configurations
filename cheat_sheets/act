@@ -1,0 +1,5 @@
+
+act -l                        # list actions
+act -h                        # help
+act -j validate-yaml -n       # dry run job
+act -j validate-yaml          # run job

@@ -29,7 +29,9 @@ aws ec2 describe-instances --profile user2
 
 
 # List of configured profiles
+aws configure list-profiles
 cat  ~/.aws/credentials | grep "\["
+
 
 # return caller identity
 aws sts get-caller-identity

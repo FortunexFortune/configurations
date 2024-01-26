@@ -681,9 +681,10 @@ kubectl get pods --all-namespaces | grep Evicted | awk '{print $2 " --namespace=
 https://linuxhint.com/xargs_linux/
 echo -n "pods-pods" | xargs -d - -I{} kubectl auth can-i create {} --as cirium_developers --as-group cirium_developers --namespace atomicus-feature-aosom-138
 
+kubectl auth can-i create pods --subresource='portforward' --as cirium_developers --as-group aws-auth:cirium-developers -n clarion-demo # test if user can use port foward
 
 
-
+kubectl create role laminar-regs-feature-spe-313-b-role --namespace=laminar-regs-feature-spe-313-b --verb=get,list,watch,create,update,patch,delete --resource=deployments,pods,pods/portforward,services,configmaps,secrets  --dry-run=client -o yaml | kubectl replace -n "laminar-regs-feature-spe-313-b" -f - # grant namespace permissions
 
 
 kubectl get job | grep myjob | awk '{print $1}' | xargs kubectl delete job

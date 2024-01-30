@@ -808,6 +808,11 @@ journalctl -u service_name		# Returns log related to the service selected
 journalctl -o versbose 			# Returns log in a DB format
 journalctl -o json-pretty		# Returns log in multi line json format 
 
+# https://unix.stackexchange.com/questions/130786/can-i-remove-files-in-var-log-journal-and-var-cache-abrt-di-usr
+journalctl --disk-usage
+journalctl --vacuum-time=10d
+journalctl --vacuum-size=500M
+
 localectl 				# Retusns systmem localose and keyboard mapping
 timedatectl				# view and set time zone and system time
 timedatectl list-timezones 		# Return time zones available

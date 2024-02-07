@@ -128,3 +128,12 @@ if [ -n "$ERRORS" ]; then
   done
   exit 1
 fi
+
+
+=============================================
+# Create temporary file, and ensure it's cleaned up on exit
+=============================================
+
+secrets=$(mktemp -t secrets.XXXXXX)
+trap 'rm "$secrets"' EXIT
+echo "${CI_SECRET}" > "${secret}" &&  source "${secret}"

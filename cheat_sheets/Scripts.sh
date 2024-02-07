@@ -136,4 +136,4 @@ fi
 
 secrets=$(mktemp -t secrets.XXXXXX)
 trap 'rm "$secrets"' EXIT
-echo "${CI_SECRET}" > "${secret}" &&  source "${secret}"
+echo "${CI_SECRET}" > "${secrets}" &&  source "${secrets}"

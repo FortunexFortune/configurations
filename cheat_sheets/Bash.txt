@@ -1281,3 +1281,7 @@ sudo dpkg-reconfigure -plow unattended-upgrades
 
 cat /var/log/unattended-upgrades/ 
 
+
+# search and replace all in directory
+find . -type f -exec sed -i 's/EKS_CLUTSER_NAME/EKS_CLUSTER_NAME/g' {} +
+

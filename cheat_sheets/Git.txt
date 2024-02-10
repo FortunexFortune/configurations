@@ -243,3 +243,7 @@ git log -S "log4" --source --all                # To find all commits that added
                                                 # --all parameter means to start from every branch and --source means to show which of those branches led to finding that commit.
                                                 # https://stackoverflow.com/questions/5816134/how-to-find-the-git-commit-that-introduced-a-string-in-any-branch
 
+
+
+# add execute bit to script
+git update-index --chmod=+x your_script.sh

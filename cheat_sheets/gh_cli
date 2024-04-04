@@ -1,0 +1,37 @@
+
+
+gh auth login
+gh status
+gh repo list [user-name]
+
+
+
+
+# inspired by https://stackoverflow.com/questions/57927115/delete-a-workflow-from-github-actions
+#!/bin/bash
+
+set -e
+
+org="LexisNexis-RBA"
+repo="dsg-cirium-deployment-csaf"
+
+# Get workflow IDs with status "disabled_manually"
+workflow_ids=($(gh api repos/$org/$repo/actions/workflows --paginate | jq '.workflows[] | select(.["state"] | contains("disabled_manually")) | .id'))
+
+for workflow_id in "${workflow_ids[@]}"
+do
+  gh workflow view "${workflow_id}"
+  echo "proceed with deleting runs for the workflow??"
+  read varname
+
+  # TODO - skip delete process if varname is no
+  # TODO - varname is either yes or no
+
+  echo "Listing runs for the workflow ID $workflow_id"
+  run_ids=( $(gh api repos/$org/$repo/actions/workflows/$workflow_id/runs --paginate | jq '.workflow_runs[].id') )
+  for run_id in "${run_ids[@]}"
+  do
+    echo "Deleting Run ID $run_id"
+    gh api repos/$org/$repo/actions/runs/$run_id -X DELETE >/dev/null
+  done
+done

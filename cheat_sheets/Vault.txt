@@ -6,6 +6,18 @@ consul kv delete -recurse vault/
 sudo systemctl start vault
 vault operator init 
 
+
+==============================
+= ENV VARS
+==============================
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_TOKEN="something"
+
+==============================
+= dev mode  
+==============================
+vault server -dev -dev-root-token-id="root-token"
+
 ==============================
 = Starting  
 ==============================
@@ -48,6 +60,7 @@ vault secrets enable -path=my_secrets kv                      # Enable kv secret
 vault kv put my_secrets/db password=root99                    # Create kv secret
 vault kv get my_secrets/db                                    # Get kv secret
 vault kv delete my_secrets/db                                 # Delete kv secret
+vault kv undelete -version number my_secrets/db               # undelete kv secret
 
 
 ==============================

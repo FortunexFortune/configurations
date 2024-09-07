@@ -91,7 +91,32 @@ vault write auth/jwt/config \
 = Policy
 ==============================
 vault policy write <policy_name> policy_name.hcl              # add policy to vault
+vault write auth/userpass/users/sam/policies policies=sam     # attach policy to user or entity
 vault list auth/{auth_method}/role                            # list roles
+
+==============================
+= user passs
+==============================
+
+vault write auth/userpass/users/bob password=bobtest123
+vault policy write bob ./bob-policy.hcl
+vault write auth/userpass/users/bob/policies policies=bob
+
+==============================
+= App role 
+==============================
+
+vault auth enable approle                                                                       # create approle
+vault policy write jenkins ./jenkins-policy.hcl                                                 # create policy
+vault write auth/approle/role/jenkins token_policies="jenkins" token_ttl=1h token_max_ttl=4h    # attach policy to role
+vault read auth/approle/role/jenkins                                                            # verify role
+vault read auth/approle/role/jenkins/role-id                                                    # Get the RoleID 
+vault write -force auth/approle/role/jenkins/secret-id                                          # Get secret role id
+vault write auth/approle/login role_id=<role-id> secret_id=<secret-id>                          # Login with RoleID and SecretID
+
+
+
+
 
 =============================
 = API

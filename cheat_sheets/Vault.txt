@@ -105,6 +105,8 @@ vault write auth/userpass/users/bob password=bobtest123
 vault policy write bob ./bob-policy.hcl
 vault write auth/userpass/users/bob/policies policies=bob
 
+vault token capabilities secret/foo                        # view what a token can access
+
 ==============================
 = App role 
 ==============================

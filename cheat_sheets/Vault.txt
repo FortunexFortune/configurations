@@ -70,7 +70,6 @@ vault kv undelete -version number my_secrets/db               # undelete kv secr
 vault token create                                            # crate token
 vault token revoke <token>                                    # revoke token
 vault token create -policy="policy_name"                      # create a token with a policy attached
-vault token capabilities <secret_path/something/ok>           # returns the capabilities the vault token has over that path 
 
 
 # User and password
@@ -106,8 +105,9 @@ vault token create -orphan -policy my-policy -ttl 30m        # create orphan tok
 vault token lookup root 
 vault token revoke 96ddf4bc-d217-f3ba-f9bd-017055595017
 vault token create -policy=my-policy -policy=other-policy
-
- vault token lookup -accessor 9793c9b3-e04a-46f3-e7b8-748d7da248da    # Get information about a token via its accessor:
+vault token lookup -accessor 9793c9b3-e04a-46f3-e7b8-748d7da248da     # Get information about a token via its accessor:
+vault token capabilities <secret_path/something/ok>                   # returns the capabilities the vault token has over that path 
+vault token revoke -self                                              # revoke current auth token
 
 
 

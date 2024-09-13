@@ -63,6 +63,21 @@ vault kv delete my_secrets/db                                 # Delete kv secret
 vault kv undelete -version number my_secrets/db               # undelete kv secret
 
 
+vault secrets enable kv                            # Enables the secrets engine for KV version 1.
+vault secrets enable kv-v2                         #  Enables the secrets engine for KV version 2.
+vault secrets enable -path=local kv                # Enables the secrets engine for KV version 1 with a custom mount point.
+vault secrets enable -path=local kv2 -version=kv   # Enables the secrets engine for KV version 2 with a custom mount point.
+
+
+vault kv put kv/webblog/mongo key1=value1 key2=value2                # write with v1
+vault kv put kv-v2/webblog/mongo data.key1=value1 data.key2=value2   # write with v2
+
+
+vault kv get kv/webblog/mongo                                        # vault read v1
+vault kv get kv-v2/webblog/mongo                                     # vault read v2
+
+
+
 ==============================
 = Authentication  
 ==============================

@@ -224,7 +224,25 @@ curl -s \
     -H "Authorization: Bearer ${TOKEN}" \
     -H "Content-Type: application/json" \
     https://vault.development-aws.fortunetech.dev/v1/auth/token/lookup-self | jq '.'
-    
+
+
+# To write a secret in KV version 1, you would use the curl command:
+curl --header "X-Vault-Token: my_token" --request POST --data '{"key1": "value1", "key2": "value2"}' https://vaulturl/v1/kv/webblog/mongo
+
+
+#For KV version 2, the difference is the addition of the “data” keyword:
+curl --header "X-Vault-Token: my_token" --request POST --data '{"data": {"key1": "value1", "key2": "value2"}}' https://vaulturl/v1/kv-v2/webblog/mongo
+
+
+
+# For reading a secret, the request in KV version 1 is:
+curl --header "X-Vault-Token: my_token" https://vaulturl/v1/kv/webblog/mongo
+
+
+# In KV version 2, you would use:
+curl --header "X-Vault-Token: my_token" https://vaulturl/v1/kv-v2/webblog/mongo
+
+
     
 
 ==============================

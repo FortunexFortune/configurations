@@ -95,7 +95,13 @@ vault lease renew lease_id                    # Renews a lease for credentials.
 vault lease renew lease_id                    # Renews a lease for credentials.
 
 
+# Tasnibt
 
+vault secrets enable transit                                                                                     # Enable the Transit Secret Engine
+vault write -f transit/keys/my-key                                                                               # Create an Encryption Key
+vault write -f transit/keys/my-key type=rsa2048
+vault write transit/encrypt/my-key plaintext=BASE64_ENCODED_DATA                                                 # Encrypt Data
+vault write -field=plaintext transit/decrypt/my-key ciphertext=BASE64_ENCODED_CIPHERTEXT | base64 --decode       # Decrypt Data
 
 
 ==============================

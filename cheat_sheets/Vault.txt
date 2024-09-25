@@ -1,10 +1,7 @@
 # Vault
 
-# Restarting vault
-sudo systemctl stop vault
-consul kv delete -recurse vault/
-sudo systemctl start vault
-vault operator init 
+https://github.com/FortunexFortune/vault-101
+
 
 
 ==============================

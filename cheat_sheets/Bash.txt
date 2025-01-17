@@ -944,6 +944,27 @@ showmount -e 192.168.1.12	# Run this on the client
 sudo umount /mnt/myfolder
 
 
+================= GPG ===========================
+# Import the Public Key from the Keyserver
+#  Verify the Imported Key
+# Encrypt the String
+#  Decrypt the Encrypted String 
+
+
+gpg --keyserver keyserver.ubuntu.com --recv-keys KEY_ID
+gpg --list-keys
+echo "This is a secret message" | gpg --encrypt --armor --recipient someone@example.com
+
+echo "ENCRYPTED_STRING" | gpg --decrypt
+echo "-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+
+hQEMA1Gi+lbn/NABAj/VAyrtJ+kHVFfsjOiUCoJh3EQOSPiWXlwPcF64I2qKrGPp
+5BygdPxdiEfTF/nPPQhlAS8TqrkuZT4VmLOEYXeEYuhT//jVWOfOKbcnmr1GHCCm
+...
+-----END PGP MESSAGE-----" | gpg --decrypt
+
+
 
 ================== Encryption ===================
 # https://www.cyberciti.biz/tips/linux-how-to-encrypt-and-decrypt-files-with-a-password.html
@@ -982,6 +1003,8 @@ gpg -o outputFile fileToDecrypt.gpg	# (symmetric encryption Decrypt gpg content 
 echo RELOADAGENT | gpg-connect-agent	# reload gpg agent, clear it's cache, hence it will forget passoword
 gpg -d myfinancial.info.txt.gpg		# Decrypt
 gpg --decrypt myfinancial.info.txt.gpg	# Decrypt
+
+
 
 
 ==================== Swap ============================

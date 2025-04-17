@@ -386,3 +386,19 @@ output=json
 role_arn = arn:aws:iam::xxxxx:role/OrganizationAccountAccessRole
 role_session_name=vagrant-OrganizationAccountAccessRole
 source_profile=default
+
+
+================================
+= KMS and Data encryption key made easy
+================================
+https://github.com/aws/aws-encryption-sdk-cli
+
+aws-encryption-cli --encrypt --input ${{ inputs.TF_DIR }}/${{ env.TF_PLAN_FILE }} \
+--wrapping-keys key=${{inputs.TF_ENCRYPTION_KMS_ARN }} \
+--metadata-output metadata --output ${{ inputs.TF_DIR }}/${{ env.TF_PLAN_FILE }}.enc
+
+aws-encryption-cli --decrypt --input ${{ inputs.TF_DIR }}/${{ env.TF_PLAN_FILE }}.enc \
+--wrapping-keys key=${{inputs.TF_ENCRYPTION_KMS_ARN }} \
+--metadata-output metadata --output ${{ inputs.TF_DIR }}/${{ env.TF_PLAN_FILE }} 
+
+

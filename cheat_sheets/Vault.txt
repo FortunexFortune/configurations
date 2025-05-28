@@ -153,6 +153,11 @@ vault token revoke -self                                              # revoke c
 
 
 
+vault token lookup                                                    #  Displays information about a token or accessor. If a TOKEN is not provided,
+                                                                         the locally authenticated token is used
+
+
+
 ==============================
 = user passs
 ==============================

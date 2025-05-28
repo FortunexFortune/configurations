@@ -30,7 +30,7 @@ vault operator unseal key1              # unseal vault by using any of the 3 uns
 vault operator unseal key2
 vault operator unseal key12
 
-vault operator init -key-shares-1 key-threshold=1     # return xnumber of vault shamir keyy
+vault operator init -key-shares=1 -key-threshold=1     # return xnumber of vault shamir keyy
 
 vault login                             # authenticates users or machines to Vault using the provided arguments 
                                         # prompots you to insert a vault token

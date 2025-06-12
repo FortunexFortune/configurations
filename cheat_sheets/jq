@@ -76,3 +76,6 @@ gh api --paginate /orgs/migration-testing-org/repos \
 gh api --paginate /orgs/${{ env.ORG }}/repos \
 --jq '.[] | select(.name | startswith("${{ env.SEARCH_PREFIX}}")) | select(.archived == ${{ env.ARCHIVE }}) | [${{ env.FIELDS}}] | @tsv' \
 | column -t  | sort | tee -a ${{ env.OUTPUT_FILE }}
+
+
+gh api --paginate /orgs/lexisnexis-iac/repos --jq '.[] | select(.name | startswith("dsg-cirium")) | select(.archived == true)| [.full_name, .visibility] | @tsv' | column -t | sort | tee -a iac_repositories.archived.tx

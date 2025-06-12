@@ -40,3 +40,39 @@ Example input
 # GET projects from MEND and filter AirOps ones
 cat data | jq -r ".projectTags[] | select(.name | startswith(\"FortunexFortune\")) | {project: (.name | ltrimstr(\"FortunexFortune - \")), token: .token}" \
          | jq -r -s '.[] | "\(.project),\(.token)"' >> "${test_projects}"
+
+
+
+
+
+gh repo list my-org --topic cirium --no-archived --limit 1000 --json name,description,visibility --template '{{range .}}{{tablerow (printf "\"%s\",\"%s\",\"%s\"" .name .description .visibility)}}{{end}}' > file.csv
+
+
+gh api --paginate /orgs/migration-testing-org/repos \
+  | jq '[.[] 
+    | select(.name | startswith("dsg-cirium")) 
+    | select(.archived == false)
+    | {
+        full_name,
+        name,
+        default_branch,
+        visibility,
+        description,
+        git_url,
+        has_discussions,
+        has_downloads,
+        has_issues,
+        has_pages,
+        has_projects,
+        has_wiki,
+        homepage,
+        id,
+        node_id
+    }
+  ] | sort_by(.name)' \
+  >> inventory.json
+
+
+gh api --paginate /orgs/${{ env.ORG }}/repos \
+--jq '.[] | select(.name | startswith("${{ env.SEARCH_PREFIX}}")) | select(.archived == ${{ env.ARCHIVE }}) | [${{ env.FIELDS}}] | @tsv' \
+| column -t  | sort | tee -a ${{ env.OUTPUT_FILE }}

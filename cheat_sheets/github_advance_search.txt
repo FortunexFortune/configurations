@@ -1,0 +1,16 @@
+# Search for All references using oR statment, exclude x repos
+
+org:risk-dsg 
+(
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/workflow-python-build.yml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/workflow-docker-build.yaml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/workflow-ecs-deploy.yaml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/workflow-helm-package.yaml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/workflow-docker-retag.yaml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/template-tf-default.yml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/template-snyk-publish-to-github.yml" OR
+  "risk-dsg/dsg-cirium-github-actions/.github/workflows/template-security-scans.yml"
+)
+language:YAML
+-repo:risk-dsg/dsg-cirium-github-actions
+-repo:risk-dsg/dsg-cirium-gh-actions-workflows

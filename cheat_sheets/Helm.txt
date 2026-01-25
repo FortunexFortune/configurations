@@ -12,7 +12,12 @@ helm search repo chart-name                           # search for chart in loca
 
 helm search repo chart-name --version                # search for chart and theri versions
 
-helm show chart cahrt-name                            # return the contents of a chart
+helm show chart chart-name                            # return the contents of a chart
+
+
+helm show values chart-name                           # returns values from chart 
+helm get values chart-name                            # returns values from installed chart  
+helm get values chart-name  --all                     # returns values from installed chart  
 
 
 helm repo remove name                                 # remove repo
@@ -21,3 +26,20 @@ helm repo remove name                                 # remove repo
 
 helm install [release name] [chart name]                   # Install specific version
 helm install local-wp bintami/wordpress --version=23.1.20  # Install specific version
+
+
+
+helm list                                             # return list of installed releases 
+helm uninstall   release-name                         # remove release
+                                                      # Might need to check PV and PVCs by hand otherwise redeployments might fail
+
+
+# Installing helm chart with cli passed values
+helm install local-wp bitnami/wordpress --version=23.1.20 \
+  --set "mariadb.auth.rootPassword=myawesomepassword" \
+  --set "mariadb.auth.password=myuserpassword"
+
+
+
+
+

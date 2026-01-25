@@ -6,6 +6,18 @@ helm repo add gitlab https://charts.gitlab.io/        # add repo to helm reposti
 
 
 helm repo list                                        # list repos 
-
 helm repo update                                      # update all repos
-helm search repo                                      # list repo carts 
+helm search repo                                      # search all charts
+helm search repo chart-name                           # search for chart in local repos
+
+helm search repo chart-name --version                # search for chart and theri versions
+
+helm show chart cahrt-name                            # return the contents of a chart
+
+
+helm repo remove name                                 # remove repo
+
+
+
+helm install [release name] [chart name]                   # Install specific version
+helm install local-wp bintami/wordpress --version=23.1.20  # Install specific version

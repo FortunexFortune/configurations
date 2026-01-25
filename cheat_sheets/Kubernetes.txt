@@ -266,6 +266,10 @@ kubectl create secret generic <name> --from-file=./username.txt --from-file=./pa
 kubectl get secret <name> -o yaml 
 
 
+kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-password}' | base64 -d    # return 
+
+
+
 
 #######################################
 ## ingress Service

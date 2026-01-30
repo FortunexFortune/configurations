@@ -1,0 +1,21 @@
+#To find failed connections to port 5432 (Postgres), you want to filter on destination port 5432 and action = REJECT.
+
+fields @timestamp, @message
+| filter dstPort = 5432 and action = "REJECT"
+| sort @timestamp desc
+| limit 10000
+
+
+# If you want more visibility than just @message, try this instead:
+
+fields @timestamp, srcAddr, dstAddr, srcPort, dstPort, protocol, action
+| filter dstPort = 5432 and action = "REJECT"
+| sort @timestamp desc
+| limit 10000
+
+
+# Is traffic hitting the right RDS ENI?
+
+fields @timestamp, dstAddr, dstPort, action
+| filter dstPort = 5432
+| stats count(*) by dstAddr, action

@@ -1,0 +1,49 @@
+===============================================================
+= Auth & session
+===============================================================
+
+/login             # sign in (Claude subscription or API key)
+/logout            # sign out
+/status            # show auth method, model, and session info
+/config            # open settings (theme, model, etc.)
+/model             # switch the active model
+/cost              # show token usage and cost for the session
+
+
+===============================================================
+= Context & conversation
+===============================================================
+
+/clear             # wipe conversation context and start fresh
+/compact           # summarize history to free up context
+/resume            # resume a previous conversation
+/exit              # quit (or Ctrl+C twice)
+
+
+===============================================================
+= Project setup
+===============================================================
+
+/init              # generate a CLAUDE.md for the current repo
+/memory            # view/edit memory files
+/permissions       # manage tool permissions
+/hooks             # configure event hooks
+
+
+===============================================================
+= Help & feedback
+===============================================================
+
+/help              # list all commands
+/bug               # report a bug
+/release-notes     # see what's new
+
+===============================================================
+= Other useful ones
+===============================================================
+
+/review            # review a pull request
+/security-review   # security audit of pending changes
+/agents            # manage subagents
+/mcp               # manage MCP servers
+/ide               # connect to IDE integration

@@ -9,3 +9,32 @@ netsh interface show interface    # This command will provide a list of interfac
 ping <ip>             # tests netowk connectivity to target               
 tracert <ip>          # return complete route the packet is taking to reach the target destination 
                       # ideally used when ping is faling, helps to debug where exatcly the request is g eeting stuck
+
+
+
+rm -Force $env:USERPROFILE\Desktop\SSMAgent_latest.exe                          # remove file
+
+Get-Service AmazonSSMAgent                                                      # Get service status
+
+Get-Content "C:\ProgramData\Amazon\SSM\Logs\amazon-ssm-agent.log" -Tail 50      # Tail logs in a file 
+
+
+# Download web file locally 
+Invoke-WebRequest `
+>>     https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe `
+>>     -OutFile $env:USERPROFILE\Desktop\SSMAgent_latest.exe
+
+
+
+
+[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12'
+$code = "code"
+$id = "id"
+$region = "us-east-1"
+$dir = $env:TEMP + "\ssm"
+New-Item -ItemType directory -Path $dir -Force
+cd $dir
+(New-Object System.Net.WebClient).DownloadFile("https://amazon-ssm-$region.s3.$region.amazonaws.com/latest/windows_amd64/ssm-setup-cli.exe", $dir + "\ssm-setup-cli.exe")
+./ssm-setup-cli.exe -register -activation-code="$code" -activation-id="$id" -region="$region"
+Get-Content ($env:ProgramData + "\Amazon\SSM\InstanceData\registration")
+Get-Service -Name "AmazonSSMAgent"

@@ -25,7 +25,7 @@ Invoke-WebRequest `
 >>     -OutFile $env:USERPROFILE\Desktop\SSMAgent_latest.exe
 
 
-
+# AWS SSM agent setup on windows + Hybrid activation code
 
 [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12'
 $code = "code"
@@ -38,3 +38,18 @@ cd $dir
 ./ssm-setup-cli.exe -register -activation-code="$code" -activation-id="$id" -region="$region"
 Get-Content ($env:ProgramData + "\Amazon\SSM\InstanceData\registration")
 Get-Service -Name "AmazonSSMAgent"
+
+
+
+# Record every command output into a file
+Start-Transcript -Path "C:\Temp\bootstrap.log" -Append
+
+# Record every command output into a file example 2
+
+Start-Transcript -Path "C:\Temp\bootstrap.log" -Append
+
+Write-Host "Starting..."
+# your commands here
+
+Stop-Transcript
+``

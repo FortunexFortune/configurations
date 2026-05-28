@@ -1,0 +1,6 @@
+
+
+cat carvalhr.co.uk.csr | xclip -selection clipboard      # Copy content 
+
+
+explorer.exe .                                           # open folder

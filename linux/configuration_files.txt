@@ -191,3 +191,8 @@ C:/Users/USERNAME/.vagrant.d/boxes                  # Location where boxes are s
 /etc/sysconfig/ip6tables    # file that load rules in memory for IPV6 by iptables-persistent / REHL
 
 
+============ Datadog =======================
+
+
+ /etc/datadog-agent     # The Datadog Agent is configured by editing YAML files. On Linux systems, 
+                        # these files are located in /etc/datadog-agent by default. These files were created when you installed the Agent.

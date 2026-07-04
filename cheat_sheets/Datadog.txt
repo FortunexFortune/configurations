@@ -2,3 +2,23 @@ sum(last_10m): ( sum:trace.flask.request.errors{env:quickstart-course,service:st
 
 This query checks whether more than 5% of Flask requests for the store-discounts service in the quickstart-course environment failed in the last 10 minutes.
 If the error rate exceeds 0.05 (5%), the monitor triggers.
+
+
+
+# Agent configuration
+
+ systemctl stop datadog-agent
+ systemctl start datadog-agent
+
+
+datadog-agent status      # To verify that the Agent is running and sending data to Datadog, run the following command:
+
+
+                          # Scroll up to the Forwarder section of the command output. The Forwarder is the process that sends everything to Datadog.
+
+                          # Near the bottom of this section, find the Transaction Successes block. 
+                          # This displays the transactions that the Agent has completed with Datadog API endpoints.
+
+datadog-agent config      # The Agent config command lists the resolved values of every Agent configuration parameter. 
+                          # It includes default values and those set by using environment variables.
+

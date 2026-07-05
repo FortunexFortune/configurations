@@ -201,3 +201,7 @@ C:/Users/USERNAME/.vagrant.d/boxes                  # Location where boxes are s
 /etc/datadog-agent/datadog.yaml     # The file that configures every aspect of the Datadog Agent is datadog.yaml.
                                     # It contains hundreds of configuration options and their defaults. 
                                     # In this section, you'll update this file to set an explicit hostname and to enable logging.
+
+
+
+/etc/datadog-agent/conf.d/          # Directory with all the checks integrations

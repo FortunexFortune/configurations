@@ -22,3 +22,22 @@ datadog-agent status      # To verify that the Agent is running and sending data
 datadog-agent config      # The Agent config command lists the resolved values of every Agent configuration parameter. 
                           # It includes default values and those set by using environment variables.
 
+
+
+datadog-agent configcheck # To see a concise list of the checks the Agent is running and their configuration file paths, 
+                          # run the following command in the terminal.
+
+
+
+
+datadog-agent check disk  # return status and series of specific check
+
+
+
+
+=======================
+= Filters 
+=======================
+
+
+telemetry:universal_service_monitoring               # It filters the services to those detected by USM, excluding other sources such as APM or RUM.

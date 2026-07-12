@@ -53,3 +53,154 @@ Write-Host "Starting..."
 
 Stop-Transcript
 ``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+========================================================================================================================
+= Beginner PowerShell 7 Tutorials https://www.youtube.com/playlist?list=PLnK11SQMNnE4vcvuAahz4KhNOS7zOfmB3
+========================================================================================================================
+$PSVersionTable.PSVersion                               # Get powershell version
+
+Get-Date                                                # get date
+
+clear                                                   # clear string
+
+cd C:\\"                                                # change working directory
+Set-location -Path "C:\\"                               # change working directory
+
+Get-Help <command>
+Get-Help get-service
+
+Get-Command                                            # lists every command available in your current PowerShell session 
+                                                       # all cmdlets, functions, aliases, and also external executables (.exe, .bat, scripts, etc.) that are on your PATH.  
+                                                       # On its own it's rarely useful — its real value comes from filtering, 
+                                                       # which is why you almost always see it with parameters like -Noun, -Verb, -Module, or a name pattern:
+
+                                                        Get-Command *iis*              # anything with "iis" in the name
+                                                        Get-Command -Module SqlServer  # everything from one module
+                                                        (Get-Command).Count            # how many commands you have (fun fact check)
+                                              
+
+
+
+
+
+Get-Command -noun service                               # It's a discovery command — you use it when you know what you want to work with (services) but not which cmdlets exist for it.
+                                                        # PowerShell cmdlets follow a Verb-Noun naming convention — Get-Service, Start-Service, etc. 
+                                                        # The -Noun parameter filters the command list to only those whose noun matches what you specify. So this returns something like:
+                                                        CommandType     Name              Source
+                                                        -----------     ----              ------
+                                                        Cmdlet          Get-Service       Microsoft.PowerShell.Management
+                                                        Cmdlet          New-Service       Microsoft.PowerShell.Management
+                                                        Cmdlet          Remove-Service    Microsoft.PowerShell.Management
+                                                        Cmdlet          Restart-Service   Microsoft.PowerShell.Management
+                                                        Cmdlet          Resume-Service    Microsoft.PowerShell.Management
+                                                        Cmdlet          Set-Service       Microsoft.PowerShell.Management
+                                                        Cmdlet          Start-Service     Microsoft.PowerShell.Management
+                                                        Cmdlet          Stop-Service      Microsoft.PowerShell.Management
+                                                        Cmdlet          Suspend-Service   Microsoft.PowerShell.Management
+
+
+
+Get-ExecutionPolicy -List
+Get-ExecutionPolicy                                    # shows PowerShell's current script execution policy — the setting that controls whether PowerShell will run script files (.ps1) on the machine.
+                                                        Restricted — no scripts run at all; interactive commands only. (Old default on Windows clients)
+                                                        AllSigned — only scripts signed by a trusted publisher run.
+                                                        RemoteSigned — locally created scripts run freely; scripts downloaded from the internet must be signed. (Default on Windows Server)
+                                                        Unrestricted — everything runs, with a warning prompt for downloaded scripts.
+                                                        Bypass — everything runs, no warnings, no prompts.
+                                                        Undefined — no policy set at that scope.
+
+Set-ExecutionPolicy RemoteSigned   
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+powershell -ExecutionPolicy Bypass -File script.ps1    #  That per-process bypass is exactly what a lot of automation tooling does 
+
+
+===========================================================
+= Variables
+===========================================================
+# camelcase is genreally used for vars        
+# Unlike bash in powershell vars are objects 
+
+Set-StrictMode -Version Latest          # TUrn on strict mode in powershell - it makes the engine throw errors for sloppy code patterns that would otherwise silently pass. Think of it as PowerShell's equivalent of set -u in Bash 
+
+$myAWesomeVar="Hey this is a string"    # setting a string var
+$myAWesomeVar                           # print var
+
+$somvar=$true                           # Setting a boolean 
+
+
+
+
+$myAWesomeVar.Length                    # Accessing attribute from var
+$myAWesomeVar.GetType()                 # Accessing method from var
+
+  
+[int]$myInt = 5                         # Create a strong type var
+
+
+
+# Avoid this if possible use ArrayList if possible 
+$myArray=@()                            # Create an array - fixed size array
+$myArray=@("apple","banana","cherry")   # Create array with values
+$myArray+="mango"                       # Add element to the array - the Add function will not work
+$myArray=$myArray -ne "mango"           # Removes element to the array - the Add function will not work
+
+
+# Arraylist
+$myList2=New-Object System.Collections.ArrayList    # Create arraylist - this is not fixed size unlike normal arrays
+
+$myList1.Add("Item1")                               # Add element to arraylist, this displays the index
+[void]$myList1.Add("Item1")                         # Add element to arraylist, does not disaply the index
+
+$myList1.Remove("Item1")                            # remove element - will only remove the first instance of the value
+
+
+
+# HashTables/Maps 
+
+
+$myHashTable = @{
+    Name = "John Doe"
+    Age = 30
+    Occupation = "Software Developer"
+}
+
+
+
+# Create Objects 
+
+$employee1 = New-Object -TypeName PSCustomObject                                              # Object creation method 1
+
+Add-Member -InputObject $employee1 -MemberType NoteProperty -Name 'EmployeeID' -Value '1001'
+Add-Member -InputObject $employee1 -MemberType NoteProperty -Name 'FirstName' -Value 'Penny'
+Add-Member -InputObject $employee1 -MemberType NoteProperty -Name 'Title' -Value 'CEO'
+
+
+
+$employee2 = [PSCustomObject]@{                                                                # Object creation method 2
+    EmployeeID = '1001'
+    FirstName  = 'Penny'
+    Title      = 'CEO'
+}
+
+
+
+
+
+
+
+

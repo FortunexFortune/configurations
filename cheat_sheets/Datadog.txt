@@ -41,3 +41,21 @@ datadog-agent check disk  # return status and series of specific check
 
 
 telemetry:universal_service_monitoring               # It filters the services to those detected by USM, excluding other sources such as APM or RUM.
+
+
+
+
+
+
+
+
+
+
+
+
+
+stress --cpu 10 --timeout 480                       # This introduces high CPU usage into one of Storedog's hosts, 
+                                                    # enabling you to observe how issues like this are surfaced in Datadog.
+
+
+
